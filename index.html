@@ -404,8 +404,10 @@
   /* floating badge */
   .hero-badge {
     position: absolute;
-    bottom: 60px;
-    left: -40px;
+    bottom: -20px; /* Fixed vertical placement */
+    left: 50%;
+    transform: translateX(-50%); /* Fixes centering so left edge doesn't start at 50% */
+    white-space: nowrap; /* Prevents text breaking onto multiple lines */
     background: var(--white);
     border: 1px solid var(--cream-border);
     border-radius: 12px;
@@ -766,7 +768,7 @@
     .hero-eyebrow { margin: 0 auto 20px; }
     .hero-tagline { margin: 0 auto 32px; }
     .hero-cta-row { justify-content: center; }
-    .hero-badge { left: 50%; transform: translateX(-50%); bottom: -20px; white-space: nowrap; }
+    /* Because we fixed the main .hero-badge class, we no longer need the duplicate placement rules here! */
 
     .section { padding: 64px 24px; }
     .features-grid { grid-template-columns: 1fr; }
@@ -783,7 +785,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">LifeOS</div>
   <ul class="nav-links">
@@ -794,7 +795,6 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg-circle c1"></div>
   <div class="hero-bg-circle c2"></div>
@@ -865,7 +865,6 @@
   </div>
 </section>
 
-<!-- FEATURES -->
 <section class="section" id="features">
   <div class="section-eyebrow">What it does</div>
   <h2>Everything you manage,<br><em>in one place</em></h2>
@@ -905,7 +904,6 @@
   </div>
 </section>
 
-<!-- SCREENSHOTS -->
 <section class="screenshots-section" id="screenshots">
   <div class="screenshots-inner">
     <div class="section-eyebrow">Screens</div>
@@ -944,16 +942,12 @@
   </div>
 </section>
 
-<!-- VIDEO -->
 <section class="video-section" id="demo">
   <div class="section-eyebrow">Demo</div>
   <h2>See it in action</h2>
   <p class="section-sub">A walkthrough of the core flows — task creation, budget tracking, and the Wind Down experience.</p>
 
   <div class="video-wrapper" id="video-wrapper">
-    <!-- TO ADD YOUR VIDEO: replace the src below with your YouTube/Loom embed URL -->
-    <!-- YouTube example: https://www.youtube.com/embed/YOUR_VIDEO_ID -->
-    <!-- Loom example:    https://www.loom.com/embed/YOUR_VIDEO_ID -->
     <iframe id="demo-iframe" src="" allowfullscreen></iframe>
 
     <div class="video-placeholder" id="video-placeholder">
@@ -963,7 +957,6 @@
   </div>
 </section>
 
-<!-- TECH STACK -->
 <section class="tech-section" id="tech">
   <div class="tech-inner">
     <div class="tech-label">Tech stack</div>
@@ -982,7 +975,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">LifeOS</div>
   <div class="footer-tagline">Your mind, money, and moments — organized.</div>
