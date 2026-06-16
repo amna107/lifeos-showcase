@@ -23,3 +23,6 @@ A mindful lifestyle management app built with Flutter & Firebase — centralizin
 ---
 
 *Source code is private. This repo hosts the landing page only.*
+ 
+ 
+> 🚧 **Work in progress** — actively being developed, new features shipping regularly.
