@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeOS — Your mind, money, and moments, organized.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep:   #2D4A3E;
+    --green-mid:    #3D6B5A;
+    --green-light:  #6A9E85;
+    --green-pale:   #C8DDD4;
+    --cream:        #F5F0E8;
+    --cream-dark:   #EDE5D4;
+    --cream-border: #DDD4C0;
+    --ink:          #1C2B24;
+    --ink-muted:    #4A6358;
+    --white:        #FDFAF5;
+
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans:  'DM Sans', system-ui, sans-serif;
+    --mono:  'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(245, 240, 232, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--cream-border);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--green-deep);
+    letter-spacing: -0.3px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    text-decoration: none;
+    letter-spacing: 0.2px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green-deep); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-bg-circle.c1 {
+    width: 600px; height: 600px;
+    top: -100px; right: -150px;
+    background: radial-gradient(circle, rgba(106,158,133,0.18) 0%, transparent 70%);
+  }
+
+  .hero-bg-circle.c2 {
+    width: 400px; height: 400px;
+    bottom: -80px; left: -100px;
+    background: radial-gradient(circle, rgba(45,74,62,0.12) 0%, transparent 70%);
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-text { z-index: 1; }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 24px;
+    padding: 6px 14px;
+    border: 1px solid var(--green-pale);
+    border-radius: 100px;
+    background: rgba(200,221,212,0.3);
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green-light);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--green-deep);
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--green-mid);
+  }
+
+  .hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 420px;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green-deep);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: var(--green-mid);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--green-deep);
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: 1.5px solid var(--green-pale);
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--green-light);
+    background: rgba(200,221,212,0.2);
+  }
+
+  /* phone mockup */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .phone-frame {
+    width: 260px;
+    height: 520px;
+    background: var(--green-deep);
+    border-radius: 40px;
+    padding: 12px;
+    box-shadow:
+      0 40px 80px rgba(45,74,62,0.25),
+      0 0 0 1px rgba(45,74,62,0.15);
+    position: relative;
+  }
+
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--cream);
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-status {
+    background: var(--green-deep);
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  .phone-status span {
+    font-size: 10px;
+    color: rgba(255,255,255,0.8);
+    font-family: var(--mono);
+  }
+
+  .phone-notch {
+    width: 70px;
+    height: 14px;
+    background: var(--green-deep);
+    border-radius: 0 0 10px 10px;
+    margin: 0 auto;
+  }
+
+  .phone-content {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .phone-greeting {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--green-deep);
+    font-weight: 600;
+  }
+
+  .phone-greeting span {
+    font-size: 12px;
+    font-weight: 300;
+    font-family: var(--sans);
+    color: var(--ink-muted);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .phone-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--cream-border);
+  }
+
+  .phone-card-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--green-light);
+    font-family: var(--mono);
+    margin-bottom: 4px;
+  }
+
+  .phone-card-value {
+    font-size: 22px;
+    font-weight: 600;
+    font-family: var(--serif);
+    color: var(--green-deep);
+  }
+
+  .phone-card-sub {
+    font-size: 10px;
+    color: var(--ink-muted);
+    margin-top: 2px;
+  }
+
+  .phone-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .phone-task {
+    background: var(--green-deep);
+    border-radius: 12px;
+    padding: 10px 12px;
+    color: var(--cream);
+  }
+
+  .phone-task-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    font-family: var(--mono);
+    margin-bottom: 4px;
+  }
+
+  .phone-task-value {
+    font-size: 18px;
+    font-weight: 600;
+    font-family: var(--serif);
+  }
+
+  .phone-breath {
+    background: linear-gradient(135deg, var(--green-pale), rgba(200,221,212,0.4));
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .breath-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--green-mid);
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.3); opacity: 1; }
+  }
+
+  .phone-breath span {
+    font-size: 9px;
+    color: var(--green-mid);
+    font-family: var(--mono);
+    letter-spacing: 0.5px;
+  }
+
+  .phone-pill-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .phone-pill {
+    font-size: 9px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: var(--cream-dark);
+    color: var(--ink-muted);
+    font-family: var(--mono);
+  }
+
+  .phone-pill.active {
+    background: var(--green-deep);
+    color: var(--white);
+  }
+
+  /* floating badge */
+  .hero-badge {
+    position: absolute;
+    bottom: 60px;
+    left: -40px;
+    background: var(--white);
+    border: 1px solid var(--cream-border);
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(45,74,62,0.12);
+    font-size: 12px;
+  }
+
+  .badge-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green-light);
+    flex-shrink: 0;
+  }
+
+  .badge-text strong { color: var(--green-deep); display: block; font-size: 13px; }
+  .badge-text span { color: var(--ink-muted); }
+
+  /* ── FEATURES ── */
+  .section {
+    padding: 100px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 600;
+    color: var(--green-deep);
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 60px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .feature-card {
+    background: var(--white);
+    border: 1px solid var(--cream-border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .feature-card:hover {
+    border-color: var(--green-pale);
+    transform: translateY(-3px);
+  }
+
+  .feature-icon {
+    width: 44px; height: 44px;
+    background: var(--cream-dark);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  .feature-title {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--green-deep);
+    margin-bottom: 10px;
+  }
+
+  .feature-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+
+  /* ── SCREENSHOTS ── */
+  .screenshots-section {
+    background: var(--green-deep);
+    padding: 100px 48px;
+    overflow: hidden;
+  }
+
+  .screenshots-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .screenshots-inner .section-eyebrow { color: var(--green-pale); }
+  .screenshots-inner h2 { color: var(--cream); }
+  .screenshots-inner .section-sub { color: var(--green-pale); }
+
+  .screenshots-scroll {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--green-mid) transparent;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .screenshot-slot {
+    flex-shrink: 0;
+    width: 220px;
+    height: 440px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--green-pale);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    padding: 20px;
+    transition: border-color 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .screenshot-slot img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 28px;
+    display: none;
+  }
+
+  .screenshot-slot:has(img[src]) img { display: block; }
+
+  .screenshot-slot .slot-icon {
+    width: 40px; height: 40px;
+    border: 1.5px dashed rgba(200,221,212,0.4);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .screenshot-slot .slot-label {
+    opacity: 0.5;
+    font-size: 10px;
+  }
+
+  /* upload hint */
+  .upload-hint {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: rgba(200,221,212,0.6);
+    font-family: var(--mono);
+  }
+
+  .upload-hint::before {
+    content: '↑';
+    font-size: 16px;
+  }
+
+  /* ── VIDEO ── */
+  .video-section {
+    padding: 100px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .video-wrapper {
+    margin-top: 48px;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--green-deep);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--cream-border);
+  }
+
+  .video-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    color: var(--green-pale);
+    text-align: center;
+  }
+
+  .play-btn {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: rgba(200,221,212,0.2);
+    border: 2px solid rgba(200,221,212,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .play-btn:hover { background: rgba(200,221,212,0.35); }
+
+  .video-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    opacity: 0.6;
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none;
+  }
+
+  /* ── TECH STACK ── */
+  .tech-section {
+    background: var(--cream-dark);
+    padding: 80px 48px;
+    border-top: 1px solid var(--cream-border);
+    border-bottom: 1px solid var(--cream-border);
+  }
+
+  .tech-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .tech-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 32px;
+  }
+
+  .tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .tech-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    border: 1px solid var(--cream-border);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    font-family: var(--mono);
+    transition: border-color 0.2s;
+  }
+
+  .tech-tag:hover { border-color: var(--green-light); color: var(--green-deep); }
+
+  .tech-tag .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green-light);
+    flex-shrink: 0;
+  }
+
+  /* ── CTA FOOTER ── */
+  footer {
+    padding: 80px 48px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--green-deep);
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+  }
+
+  .footer-tagline {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    margin-bottom: 32px;
+  }
+
+  .footer-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--cream-border);
+    margin: 32px 0 24px;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+    color: var(--ink-muted);
+    opacity: 0.6;
+    font-family: var(--mono);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+
+    .hero { padding: 100px 24px 60px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+    .hero-visual { order: -1; }
+    .hero-eyebrow { margin: 0 auto 20px; }
+    .hero-tagline { margin: 0 auto 32px; }
+    .hero-cta-row { justify-content: center; }
+    .hero-badge { left: 50%; transform: translateX(-50%); bottom: -20px; white-space: nowrap; }
+
+    .section { padding: 64px 24px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .screenshots-section { padding: 64px 24px; }
+    .video-section { padding: 64px 24px; }
+    .tech-section { padding: 48px 24px; }
+    footer { padding: 60px 24px 40px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">LifeOS</div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
+    <li><a href="#demo">Demo</a></li>
+    <li><a href="#tech">Tech</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Flutter · Firebase · Clean Architecture</div>
+      <h1>Life<em>OS</em></h1>
+      <p class="hero-tagline">Your mind, money, and moments — organized. A mindful lifestyle management app that centralizes everything that matters.</p>
+      <div class="hero-cta-row">
+        <a href="#demo" class="btn-primary">▶ &nbsp;Watch demo</a>
+        <a href="#features" class="btn-secondary">Explore features</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div style="position:relative;">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-status">
+              <span>9:41</span>
+              <div class="phone-notch"></div>
+              <span>●●●</span>
+            </div>
+            <div class="phone-content">
+              <div class="phone-greeting">
+                <span>Good morning</span>
+                Your Day
+              </div>
+              <div class="phone-card">
+                <div class="phone-card-label">Budget this month</div>
+                <div class="phone-card-value">$1,840</div>
+                <div class="phone-card-sub">↓ 12% under limit · 6 recurring bills</div>
+              </div>
+              <div class="phone-row">
+                <div class="phone-task">
+                  <div class="phone-task-label">Tasks</div>
+                  <div class="phone-task-value">7</div>
+                  <div style="font-size:9px;opacity:0.6;margin-top:2px;">due today</div>
+                </div>
+                <div class="phone-breath">
+                  <div class="breath-circle"></div>
+                  <span>Wind Down</span>
+                </div>
+              </div>
+              <div class="phone-card">
+                <div class="phone-card-label">Journal · today</div>
+                <div style="font-size:11px;color:var(--ink-muted);font-family:var(--sans);line-height:1.5;">Feeling focused. Morning run done ✓</div>
+              </div>
+              <div class="phone-pill-row">
+                <span class="phone-pill active">Tasks</span>
+                <span class="phone-pill">Finance</span>
+                <span class="phone-pill">Journal</span>
+                <span class="phone-pill">Home</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-badge">
+          <div class="badge-dot"></div>
+          <div class="badge-text">
+            <strong>Real-time sync</strong>
+            <span>Powered by Firestore</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-eyebrow">What it does</div>
+  <h2>Everything you manage,<br><em>in one place</em></h2>
+  <p class="section-sub">Five integrated modules that talk to each other — so your life doesn't feel like five separate apps.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <div class="feature-title">Task & calendar</div>
+      <p class="feature-desc">Multi-category task scheduling synced to a localized calendar. Set deadlines, track priorities, and never lose a to-do across contexts.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💰</div>
+      <div class="feature-title">Financial tracker</div>
+      <p class="feature-desc">Budget constraints, automated recurring bills, and spending overviews — all in real time. Know exactly where your money is going.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📓</div>
+      <div class="feature-title">Rich journal</div>
+      <p class="feature-desc">Media-rich journal entries backed by Cloud Storage. Capture thoughts, photos, and moments — searchable, always with you.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏠</div>
+      <div class="feature-title">Home management</div>
+      <p class="feature-desc">Track household tasks, shopping lists, and maintenance schedules — all linked to the same real-time backend.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌬️</div>
+      <div class="feature-title">Wind Down</div>
+      <p class="feature-desc">A custom-animated breathing exercise interface to close your day intentionally. Designed with care for mental wellbeing.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌗</div>
+      <div class="feature-title">Light & dark mode</div>
+      <p class="feature-desc">A centralized theming engine with seamless transitions. The app looks great at 7 AM and at midnight.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots-section" id="screenshots">
+  <div class="screenshots-inner">
+    <div class="section-eyebrow">Screens</div>
+    <h2>Built to feel good<br>to use</h2>
+    <p class="section-sub">Responsive, adaptive UI with complex widget trees, swipe interactions, and a design system built from scratch.</p>
+
+    <div class="screenshots-scroll">
+      <div class="screenshot-slot">
+        <img src="" alt="Dashboard screen">
+        <div class="slot-icon">🏠</div>
+        <div class="slot-label">Dashboard</div>
+      </div>
+      <div class="screenshot-slot">
+        <img src="" alt="Tasks screen">
+        <div class="slot-icon">📋</div>
+        <div class="slot-label">Tasks</div>
+      </div>
+      <div class="screenshot-slot">
+        <img src="" alt="Finance screen">
+        <div class="slot-icon">💰</div>
+        <div class="slot-label">Finance</div>
+      </div>
+      <div class="screenshot-slot">
+        <img src="" alt="Journal screen">
+        <div class="slot-icon">📓</div>
+        <div class="slot-label">Journal</div>
+      </div>
+      <div class="screenshot-slot">
+        <img src="" alt="Wind Down screen">
+        <div class="slot-icon">🌬️</div>
+        <div class="slot-label">Wind Down</div>
+      </div>
+    </div>
+
+    <div class="upload-hint">Replace the placeholder slots with your actual screenshots by editing the <code style="font-size:11px;opacity:0.7;">src=""</code> attributes above</div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section" id="demo">
+  <div class="section-eyebrow">Demo</div>
+  <h2>See it in action</h2>
+  <p class="section-sub">A walkthrough of the core flows — task creation, budget tracking, and the Wind Down experience.</p>
+
+  <div class="video-wrapper" id="video-wrapper">
+    <!-- TO ADD YOUR VIDEO: replace the src below with your YouTube/Loom embed URL -->
+    <!-- YouTube example: https://www.youtube.com/embed/YOUR_VIDEO_ID -->
+    <!-- Loom example:    https://www.loom.com/embed/YOUR_VIDEO_ID -->
+    <iframe id="demo-iframe" src="" allowfullscreen></iframe>
+
+    <div class="video-placeholder" id="video-placeholder">
+      <div class="play-btn" onclick="playDemo()">▶</div>
+      <div class="video-label">Demo coming soon — paste your Loom or YouTube link here</div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="tech-section" id="tech">
+  <div class="tech-inner">
+    <div class="tech-label">Tech stack</div>
+    <div class="tech-grid">
+      <div class="tech-tag"><span class="dot"></span>Flutter</div>
+      <div class="tech-tag"><span class="dot"></span>Dart</div>
+      <div class="tech-tag"><span class="dot"></span>Firebase Firestore</div>
+      <div class="tech-tag"><span class="dot"></span>Firebase Auth</div>
+      <div class="tech-tag"><span class="dot"></span>Cloud Storage</div>
+      <div class="tech-tag"><span class="dot"></span>Provider (state mgmt)</div>
+      <div class="tech-tag"><span class="dot"></span>Clean Architecture</div>
+      <div class="tech-tag"><span class="dot"></span>Android Studio</div>
+      <div class="tech-tag"><span class="dot"></span>Real-time sync</div>
+      <div class="tech-tag"><span class="dot"></span>Custom theming engine</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">LifeOS</div>
+  <div class="footer-tagline">Your mind, money, and moments — organized.</div>
+  <div class="hero-cta-row">
+    <a href="#demo" class="btn-primary">▶ &nbsp;Watch demo</a>
+    <a href="#features" class="btn-secondary">Explore features</a>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">Built with Flutter · Firebase · ☕</div>
+</footer>
+
+<script>
+  function playDemo() {
+    const iframe = document.getElementById('demo-iframe');
+    const placeholder = document.getElementById('video-placeholder');
+    const src = iframe.getAttribute('src');
+    if (src && src.trim() !== '') {
+      iframe.style.display = 'block';
+      placeholder.style.display = 'none';
+    } else {
+      placeholder.querySelector('.video-label').textContent = 'Add your video URL to the iframe src attribute to enable playback.';
+    }
+  }
+
+  // Smooth fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.feature-card, .screenshot-slot').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
